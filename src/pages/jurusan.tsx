@@ -7,21 +7,22 @@ import { trpc } from "../utils/trpc";
 const JurusanPage = () => {
   const { data: session } = useSession();
   const isAdmin = session?.user?.role === "admin";
+
   const { data: jurusan, isLoading } = trpc.jurusan.getAll.useQuery();
+
   const [idJurusan, setIdJurusan] = useState("");
   const [namaJurusan, setNamaJurusan] = useState("");
+
   const [idFakultas, setIdFakultas] = useState("");
   const [namaFakultas, setNamaFakultas] = useState("");
+
   const [addModalVisible, setAddModalVisible] = useState(false);
   const [updateModalVisible, setUpdateModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
   if (isLoading) return <Loading />;
   return (
     <div className="m-3 flex flex-col">
-      <AddModal
-        modalHidden={addModalVisible}
-        setModalHidden={setAddModalVisible}
-      />
       <AddModal
         modalHidden={addModalVisible}
         setModalHidden={setAddModalVisible}
