@@ -84,7 +84,6 @@ const FakultasPage = () => {
                   onClick={() => {
                     setUpdateModalVisible(true);
                     setIdFakultas(f.id);
-                    setNamaFakultas("");
                     setNamaFakultas(f.nama_fakultas);
                   }}
                 />
