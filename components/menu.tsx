@@ -32,7 +32,7 @@ const Menu = () => {
   }
 
   return (
-    <div className="flex h-screen w-2/12 flex-col border bg-blue-300">
+    <div className="flex h-screen w-2/12 flex-col border-r underline">
       <nav className="m-3 flex flex-col gap-y-3  text-2xl">
         <Link href={"/"} className="flex gap-x-3 hover:text-blue-500">
           Home

@@ -1,6 +1,7 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "next-themes";
 
 import { trpc } from "../utils/trpc";
 
@@ -19,9 +20,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>DSS</title>
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider enableSystem={true} attribute="class">
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </SessionProvider>
   );
 };

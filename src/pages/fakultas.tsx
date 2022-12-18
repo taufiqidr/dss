@@ -16,14 +16,17 @@ const FakultasPage = () => {
         setModalHidden={setaddModalVisible}
       />
       <h1 className="text-4xl">Fakultas</h1>
-      <div className="flex w-full justify-end">
-        <button
-          className="h-10 w-20 rounded-lg bg-blue-500 p-1 font-bold"
-          onClick={() => setaddModalVisible(true)}
-        >
-          Add
-        </button>
-      </div>
+
+      {session?.user?.role === "admin" && (
+        <div className="flex w-full justify-end">
+          <button
+            className="h-10 w-20 rounded-lg border p-1 font-bold"
+            onClick={() => setaddModalVisible(true)}
+          >
+            Add
+          </button>
+        </div>
+      )}
       <table className="mt-3 w-full border text-left">
         <thead className="border uppercase">
           <tr>
@@ -52,20 +55,6 @@ const FakultasPage = () => {
 
 export default FakultasPage;
 
-interface FakultasProps {
-  id: string;
-  name: string;
-  mahasiswa_count: number;
-}
-const FakultasRow = ({ id, name, mahasiswa_count }: FakultasProps) => {
-  return (
-    <tr className="border-b bg-white hover:bg-gray-600 dark:border-gray-700 dark:bg-gray-800">
-      <td className="py-4 px-6 text-white">{name}</td>
-      <td className="py-4 px-6 text-white">{mahasiswa_count}</td>
-    </tr>
-  );
-};
-
 interface AddModalProps {
   modalHidden: boolean;
   setModalHidden: React.Dispatch<React.SetStateAction<boolean>>;
@@ -73,6 +62,11 @@ interface AddModalProps {
 const AddModal = ({ modalHidden, setModalHidden }: AddModalProps) => {
   const utils = trpc.useContext();
   const [namaFakultas, setNamaFakultas] = useState("");
+  const disabled = !Boolean(namaFakultas);
+  const btn_save = disabled
+    ? "w-full rounded-lg bg-gray-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 sm:w-auto"
+    : "w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto";
+
   const postFakultas = trpc.fakultas.postFakultas.useMutation({
     onMutate: () => {
       utils.fakultas.getAll.cancel();
@@ -99,7 +93,7 @@ const AddModal = ({ modalHidden, setModalHidden }: AddModalProps) => {
     <div
       id="modal-container"
       aria-hidden="true"
-      className={`fixed inset-0 z-50 bg-black/50 backdrop-blur-sm ${
+      className={`fixed inset-0 z-50 backdrop-blur-sm ${
         modalHidden ? "flex" : "hidden"
       }`}
     >
@@ -158,15 +152,26 @@ const AddModal = ({ modalHidden, setModalHidden }: AddModalProps) => {
                 required
               />
             </div>
-            <button
-              type="submit"
-              className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
-            >
+            <button type="submit" className={btn_save}>
               Simpan
             </button>
           </form>
         </div>
       </div>
     </div>
+  );
+};
+
+interface FakultasProps {
+  id: string;
+  name: string;
+  mahasiswa_count: number;
+}
+const FakultasRow = ({ id, name, mahasiswa_count }: FakultasProps) => {
+  return (
+    <tr className="border-b ">
+      <td className="py-4 px-6">{name}</td>
+      <td className="py-4 px-6">{mahasiswa_count}</td>
+    </tr>
   );
 };
