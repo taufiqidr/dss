@@ -88,7 +88,6 @@ const AddModal = ({ modalHidden, setModalHidden }: AddModalProps) => {
 
       if (optimisticUpdate) {
         utils.mahasiswa.getAll.setData(undefined, [
-          ...optimisticUpdate,
           {
             id: Math.random().toString(),
             nama: namaMahasiswa,
@@ -107,6 +106,7 @@ const AddModal = ({ modalHidden, setModalHidden }: AddModalProps) => {
               updatedAt: new Date(),
             },
           },
+          ...optimisticUpdate,
         ]);
       }
     },

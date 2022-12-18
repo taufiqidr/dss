@@ -80,7 +80,6 @@ const AddModal = ({ modalHidden, setModalHidden }: AddModalProps) => {
 
       if (optimisticUpdate) {
         utils.jurusan.getAll.setData(undefined, [
-          ...optimisticUpdate,
           {
             id: Math.random().toString(),
             nama_jurusan: namaJurusan,
@@ -92,6 +91,7 @@ const AddModal = ({ modalHidden, setModalHidden }: AddModalProps) => {
             },
             mahasiswa: [],
           },
+          ...optimisticUpdate,
         ]);
       }
     },
