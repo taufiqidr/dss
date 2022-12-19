@@ -86,30 +86,32 @@ const MahasiswaPage = () => {
               <td className="py-4 px-6">{m.nim}</td>
               <td className="py-4 px-6">{m.jurusan.nama_jurusan}</td>
               <td className="py-4 px-6">{m.fakultas.nama_fakultas}</td>
-              <td className="flex justify-between py-4 px-6 text-center">
-                <BsTrashFill
-                  role={"button"}
-                  onClick={() => {
-                    setDeleteModalVisible(true);
-                    setIdMahasiswa(m.id);
-                  }}
-                />{" "}
-                <BsPencilFill
-                  role={"button"}
-                  onClick={() => {
-                    setUpdateModalVisible(true);
+              {isAdmin && (
+                <td className="flex justify-between py-4 px-6 text-center">
+                  <BsTrashFill
+                    role={"button"}
+                    onClick={() => {
+                      setDeleteModalVisible(true);
+                      setIdMahasiswa(m.id);
+                    }}
+                  />{" "}
+                  <BsPencilFill
+                    role={"button"}
+                    onClick={() => {
+                      setUpdateModalVisible(true);
 
-                    setIdMahasiswa(m.id);
-                    setNamaMahasiswa(m.nama);
-                    setNimMahasiswa(String(m.nim));
+                      setIdMahasiswa(m.id);
+                      setNamaMahasiswa(m.nama);
+                      setNimMahasiswa(String(m.nim));
 
-                    setIdJurusan(m.jurusan.id);
-                    setNamaJurusan(m.jurusan.nama_jurusan);
-                    setIdFakultas(m.fakultas.id);
-                    setNamaFakultas(m.fakultas.nama_fakultas);
-                  }}
-                />
-              </td>
+                      setIdJurusan(m.jurusan.id);
+                      setNamaJurusan(m.jurusan.nama_jurusan);
+                      setIdFakultas(m.fakultas.id);
+                      setNamaFakultas(m.fakultas.nama_fakultas);
+                    }}
+                  />
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

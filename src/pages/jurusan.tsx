@@ -60,7 +60,7 @@ const JurusanPage = () => {
             <th scope="col" className="py-3 px-6">
               Nama Fakultas
             </th>
-            <th scope="col" className="py-3 px-6">
+            <th scope="col" className="py-3 px-6 text-center">
               Jumlah Mahasiswa
             </th>
             {isAdmin && (
@@ -75,26 +75,28 @@ const JurusanPage = () => {
             <tr className="border-b " key={j.id}>
               <td className="py-4 px-6">{j.nama_jurusan}</td>
               <td className="py-4 px-6">{j.fakultas.nama_fakultas}</td>
-              <td className="py-4 px-6">{j.mahasiswa.length}</td>
-              <td className="flex justify-between py-4 px-6 text-center">
-                <BsTrashFill
-                  role={"button"}
-                  onClick={() => {
-                    setDeleteModalVisible(true);
-                    setIdJurusan(j.id);
-                  }}
-                />{" "}
-                <BsPencilFill
-                  role={"button"}
-                  onClick={() => {
-                    setUpdateModalVisible(true);
-                    setIdJurusan(j.id);
-                    setNamaJurusan(j.nama_jurusan);
-                    setIdFakultas(j.fakultas.id);
-                    setNamaFakultas(j.fakultas.nama_fakultas);
-                  }}
-                />
-              </td>
+              <td className="py-4 px-6 text-center">{j.mahasiswa.length}</td>
+              {isAdmin && (
+                <td className="flex justify-between py-4 px-6 text-center">
+                  <BsTrashFill
+                    role={"button"}
+                    onClick={() => {
+                      setDeleteModalVisible(true);
+                      setIdJurusan(j.id);
+                    }}
+                  />{" "}
+                  <BsPencilFill
+                    role={"button"}
+                    onClick={() => {
+                      setUpdateModalVisible(true);
+                      setIdJurusan(j.id);
+                      setNamaJurusan(j.nama_jurusan);
+                      setIdFakultas(j.fakultas.id);
+                      setNamaFakultas(j.fakultas.nama_fakultas);
+                    }}
+                  />
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

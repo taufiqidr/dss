@@ -71,23 +71,25 @@ const FakultasPage = () => {
               <td className="py-4 px-6">{f.nama_fakultas}</td>
               <td className="py-4 px-6 text-center">{f.jurusan.length}</td>
               <td className="py-4 px-6 text-center">{f.mahasiswa.length}</td>
-              <td className="flex justify-between py-4 px-6 text-center">
-                <BsTrashFill
-                  role={"button"}
-                  onClick={() => {
-                    setDeleteModalVisible(true);
-                    setIdFakultas(f.id);
-                  }}
-                />{" "}
-                <BsPencilFill
-                  role={"button"}
-                  onClick={() => {
-                    setUpdateModalVisible(true);
-                    setIdFakultas(f.id);
-                    setNamaFakultas(f.nama_fakultas);
-                  }}
-                />
-              </td>
+              {isAdmin && (
+                <td className="flex justify-between py-4 px-6 text-center">
+                  <BsTrashFill
+                    role={"button"}
+                    onClick={() => {
+                      setDeleteModalVisible(true);
+                      setIdFakultas(f.id);
+                    }}
+                  />{" "}
+                  <BsPencilFill
+                    role={"button"}
+                    onClick={() => {
+                      setUpdateModalVisible(true);
+                      setIdFakultas(f.id);
+                      setNamaFakultas(f.nama_fakultas);
+                    }}
+                  />
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
